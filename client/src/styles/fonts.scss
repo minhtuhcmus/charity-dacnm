@@ -1,0 +1,71 @@
+// https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face
+
+$fontFamily: 'SVN-Gilroy';
+$regularWeight: 400;
+$mediumWeight: 500;
+$semiBoldWeight: 600;
+$boldWeight: 700;
+
+// regular
+@font-face {
+  font-family: $fontFamily;
+  font-weight: $regularWeight;
+  font-style: normal;
+  src: url('/static/fonts/SVN-Gilroy/SVN-Gilroy Regular.otf') format('opentype');
+}
+
+// italic
+@font-face {
+  font-family: $fontFamily;
+  font-weight: $regularWeight;
+  font-style: italic;
+  src: url('/static/fonts/SVN-Gilroy/SVN-Gilroy Italic.otf') format('opentype');
+}
+
+// medium
+@font-face {
+  font-family: $fontFamily;
+  font-weight: $mediumWeight;
+  font-style: normal;
+  src: url('/static/fonts/SVN-Gilroy/SVN-Gilroy Medium.otf') format('opentype');
+}
+
+// medium-italic
+@font-face {
+  font-family: $fontFamily;
+  font-weight: $mediumWeight;
+  font-style: italic;
+  src: url('/static/fonts/SVN-Gilroy/SVN-Gilroy Medium Italic.otf') format('opentype');
+}
+
+// semi-bold
+@font-face {
+  font-family: $fontFamily;
+  font-weight: $semiBoldWeight;
+  font-style: normal;
+  src: url('/static/fonts/SVN-Gilroy/SVN-Gilroy SemiBold.otf') format('opentype');
+}
+
+// semi-bold|italic
+@font-face {
+  font-family: $fontFamily;
+  font-weight: $semiBoldWeight;
+  font-style: italic;
+  src: url('/static/fonts/SVN-Gilroy/SVN-Gilroy SemiBold Italic.otf') format('opentype');
+}
+
+// bold
+@font-face {
+  font-family: $fontFamily;
+  font-weight: $boldWeight;
+  font-style: normal;
+  src: url('/static/fonts/SVN-Gilroy/SVN-Gilroy Bold.otf') format('opentype');
+}
+
+// bold|italic
+@font-face {
+  font-family: $fontFamily;
+  font-weight: $boldWeight;
+  font-style: italic;
+  src: url('/static/fonts/SVN-Gilroy/SVN-Gilroy Bold Italic.otf') format('opentype');
+}

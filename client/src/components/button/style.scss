@@ -1,0 +1,55 @@
+@import "_styles/index.scss";
+.component-button{
+  width: 100%;
+  button{
+    outline: none;
+    border-radius: 4px;
+    cursor: pointer;
+    width: 100%;
+    &:active{
+      @include box-shadow($BackgroundF);
+      transform: scale(.95) !important;
+    }
+    &:hover{
+      transform: scale(1.05);
+    }
+  }
+  .small{
+    @extend .label-4;
+    padding: 8px;
+  }
+  .normal{
+    @extend .label-3;
+    padding: 12px;
+  }
+  .large{
+    @extend .label-2;
+    padding: 12px;
+  }
+
+  .primary{
+    background-color: $PrimaryPrimary;
+    color: $White;
+    border: none;
+    &:hover{
+      background-color: $PrimaryFocus;
+    }
+  }
+  .danger{
+    background-color: $DangerPrimary;
+    color: $White;
+    border: none;
+    &:hover{
+      background-color: $DangerFocus;
+    }
+  }
+  .disable{
+    background-color: $DisableSecondary;
+    color: $DisableFocus;
+    border: none;
+    &:hover{
+      cursor: not-allowed;
+      transform: scale(1);
+    }
+  }
+}

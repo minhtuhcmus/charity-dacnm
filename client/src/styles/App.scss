@@ -1,0 +1,12 @@
+@import '_styles/typography.scss';
+@import '_styles/color.scss';
+html, body {
+  margin: 0;
+  padding: 0;
+  font-family: 'SVN-Gilroy';
+  background-color: $BackgroundA;
+}
+
+.hide{
+  display: none !important;
+}

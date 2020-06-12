@@ -1,0 +1,29 @@
+@import '_styles/index.scss';
+.login-page-wrapper{
+  padding: 12px 12px 24px 12px;
+  position: absolute;
+  width: fit-content;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  .login-form{
+    display: flex;
+    flex-direction: column;
+    background: $White;
+    border-radius: 16px;
+    justify-content: center;
+    align-items: center;
+    @include box-shadow($BackgroundD);
+    & > .title{
+      text-align: center;
+      @extend .heading-3;
+    }
+    .content{
+      width: 300px;
+      padding: 0 60px 0 60px;
+    }
+    .foot{
+
+    }
+  }
+}

@@ -1,0 +1,11 @@
+@import '_styles/index.scss';
+div{
+  .test{
+    border: 1px solid black;
+    background: wheat;
+    padding: 10px;
+    width: fit-content;
+    margin-left: 20px;
+    @include box-shadow($BackgroundD);
+  }
+}

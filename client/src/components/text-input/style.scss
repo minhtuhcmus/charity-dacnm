@@ -1,0 +1,43 @@
+@import '_styles/index.scss';
+.component-text-input{
+  width: 100%;
+  .title{
+    @extend .label-2;
+    color: $PrimaryD;
+  }
+  .errors{
+    @extend .display-6;
+    color: $DangerPrimary;
+  }
+  .error{
+    background-color: $DangerPrimary;
+  }
+  .warning{
+    background-color: $WarningPrimary;
+  }
+  input {
+    color: $PrimaryD;
+    border: 1px solid $BackgroundE;
+    border-radius: 2px;
+    margin: 8px 0px 8px 0px;
+    box-sizing: border-box;
+    width: 100%;
+    &:focus{
+      outline: $PrimaryA solid 1px;
+      border-radius: 2px;
+      @include box-shadow($BackgroundD);
+    }
+  }
+  .small{
+    @extend .paragraph-4;
+    padding: 8px;
+  }
+  .normal{
+    @extend .paragraph-3;
+    padding: 12px;
+  }
+  .large{
+    @extend .paragraph-2;
+    padding: 12px;
+  }
+}
