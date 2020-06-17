@@ -12,8 +12,14 @@ export const PAGE_TYPE = {
   PUBLIC: 'PUBLIC'
 }
 
-export const ACTIONS ={
+export const ACTIONS = {
+  // general
   LOADING: 'LOADING',
+  // auth
   LOGIN: 'LOGIN',
   LOGOUT: 'LOGOUT',
+  // user
+  VOTE: 'VOTE',
+  GET_ELECTION: 'GET_ELECTION' 
+  
 }

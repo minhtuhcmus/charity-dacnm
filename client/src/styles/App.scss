@@ -1,5 +1,6 @@
 @import '_styles/typography.scss';
 @import '_styles/color.scss';
+@import '_styles/mixin.scss';
 html, body {
   margin: 0;
   padding: 0;
@@ -9,4 +10,17 @@ html, body {
 
 .hide{
   display: none !important;
+}
+
+.box-wrapper{
+  border-radius: 8px;
+  @include box-shadow($BackgroundD);
+  background: $White;
+}
+
+.centering{
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
 }

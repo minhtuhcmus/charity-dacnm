@@ -4,7 +4,7 @@ const AppHeader = () => {
 
   return (
     <div className="header-component">
-      Header
+      VOTE WITH BLOCKCHAIN
     </div>
   )
 }

@@ -1,4 +1,6 @@
 import ProfilePage from './ProfilePage'
+import VotePage from './VotePage'
+
 import PrivateRoute from '_router/PrivateRoute'
 const routeConfig = {
   layout: {
@@ -15,6 +17,18 @@ const PrivateRoutes = [
     title: 'Profile Page',
     component: ProfilePage,
     path: '/profile',
+  },
+  {
+    ...routeConfig,
+    layout: {
+      header: true,
+      sider: false,
+      footer: true,
+    },
+    title: 'Vote Page',
+    component: VotePage,
+    path: '/vote',
+    roleAllow: 'USER'
   }
 ]
 

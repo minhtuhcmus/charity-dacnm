@@ -57,7 +57,7 @@ module.exports = () => {
         _constants: path.resolve(__dirname, 'src/constants'),
         _api: path.resolve(__dirname, 'src/api'),
         _src: path.resolve(__dirname, 'src'),
-        _helpers: path.resolve(__dirname, 'src/helpers'),
+        _helpers: path.resolve(__dirname, 'src/utils/helpers'),
         _layout: path.resolve(__dirname, 'src/layout'),
         _router: path.resolve(__dirname, 'src/router'),
         _styles: path.resolve(__dirname, 'src/styles'),
@@ -72,7 +72,7 @@ module.exports = () => {
     devServer: {
       contentBase: path.join(__dirname, "public/"),
       host: '127.0.0.1',
-      port: 5000,
+      port: 3000,
       hot: true,
       open: true,
       quiet: true,
@@ -81,7 +81,7 @@ module.exports = () => {
       watchContentBase: true,
       disableHostCheck: true,
       historyApiFallback: true,
-      publicPath: "http://localhost:5000/dist/"
+      publicPath: "http://localhost:3000/dist/"
     },
     plugins: [
       new webpack.HotModuleReplacementPlugin(),
