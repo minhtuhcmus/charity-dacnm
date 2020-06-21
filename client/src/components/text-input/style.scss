@@ -10,10 +10,10 @@
     color: $DangerPrimary;
   }
   .error{
-    background-color: $DangerPrimary;
+    background-color: $DangerSecondary;
   }
   .warning{
-    background-color: $WarningPrimary;
+    background-color: $WarningSecondary;
   }
   input {
     color: $PrimaryD;
@@ -22,9 +22,9 @@
     margin: 8px 0px 8px 0px;
     box-sizing: border-box;
     width: 100%;
+    outline: none;
     &:focus{
-      outline: $PrimaryA solid 1px;
-      border-radius: 2px;
+      border: 1px solid $PrimaryA;
       @include box-shadow($BackgroundD);
     }
   }

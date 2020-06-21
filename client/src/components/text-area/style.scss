@@ -1,0 +1,46 @@
+@import '_styles/index.scss';
+
+.component-textarea{
+  height: 100%;
+  .title{
+    @extend .label-2;
+    color: $PrimaryD;
+  }
+  textarea{
+    width: 100%;
+    height: 100%;
+    resize: none;
+    border: 1px solid $BackgroundE;
+    outline: none;
+    padding: 12px;
+    color: $PrimaryD;
+    @extend .paragraph-3;
+    box-sizing: border-box;
+    &:focus{
+      border: 1px solid $PrimaryA;
+      @include box-shadow($BackgroundD);
+    }
+    /* width */
+    &::-webkit-scrollbar {
+      width: 8px;
+    }
+
+    /* Track */
+    &::-webkit-scrollbar-track {
+      background: $BackgroundC;
+      border-radius: 4px;
+    }
+
+    /* Handle */
+    &::-webkit-scrollbar-thumb {
+      background: $BackgroundD;
+      border-radius: 4px;
+    }
+
+    /* Handle on hover */
+    &::-webkit-scrollbar-thumb:hover {
+      background: $BackgroundE;
+      cursor: pointer;
+    }
+  }
+}
