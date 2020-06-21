@@ -3,6 +3,7 @@ import './style.scss'
 //component
 import VotingList from '_components/voting-list'
 import Button from '_components/button'
+import TextInput from '_components/text-input'
 //package
 const VotePage = props => {
   const [value, setValue] = useState(null)

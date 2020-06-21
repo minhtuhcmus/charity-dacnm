@@ -1,13 +1,22 @@
-import React, { useState, useRef } from 'react'
+import React, { useState, useRef, useEffect } from 'react'
 import './style.scss'
 // components
 import TextArea from '_components/text-area'
 import TextInput from '_components/text-input'
 import Button from '_components/button'
 const CreateElectionPage = props => {
+  const [description, setDescription] = useState(null)
   const [candidate, setCandidate] = useState(0)
-  const [candidateList, setCandidateList] = useState([])
+  const [candidateList, setCandidateList] = useState(false)
+  const [data, setData] = useState(false)
   const uploadRef = useRef(null)
+  useEffect(() => {
+    let temp = []
+    for (let i = 0; i < candidate; i++) {
+      temp.push(false)
+    }
+    setCandidateList(temp)
+  }, [candidate])
   const renderCandidateInput = () => {
     const res = []
     for (let i = 0; i < candidate; i++) {
@@ -16,10 +25,9 @@ const CreateElectionPage = props => {
           <TextInput
             key={i}
             placeholder={`Tên ứng viên ${i + 1}`}
-            
             onChange={
               e => {
-                let temp = {...candidateList}
+                let temp = [...candidateList]
                 temp[i] = e.target.value
                 setCandidateList(temp)
               }
@@ -33,10 +41,64 @@ const CreateElectionPage = props => {
     }
     return null
   }
+  const handleUploadFile = files => {
+    const { length } = files
+    const reader = new window.FileReader()
+    if (length === 0) {
+      return false
+    }
+    const { type, name } = files[0]
+    if (type != 'text/plain') {
+      return
+    }
+    reader.readAsText(files[0])
+    reader.onload = loadEvt => {
+      const data = loadEvt.target.result
+      setData({
+        filename: name,
+        data: data.split("\n")
+      })
+    }
+  }
+  const onDrop = e => {
+    e.preventDefault()
+    const {
+      dataTransfer: { files }
+    } = e
+    handleFileUpload(files)
+  }
+  const onDragOver = e => {
+    e.preventDefault()
+  }
+  const onDragLeave = e => {
+    e.preventDefault()
+  }
+  const controllButton = () => {
+    if (!description)
+      return false
+    if (candidate === 0)
+      return false
+    else {
+      if (candidateList.length === 0)
+        return false
+      else
+        candidateList.forEach(el => {
+          if (!el)
+            return false
+        })
+    }
+    if (!data)
+      return false
+    return true
+  }
   return (
     <div className="page-create-election">
       <div className="description">
-        <TextArea placeholder="Mô tả"/>
+        <TextArea
+          placeholder="Mô tả"
+          value={description}
+          onChange={e => setDescription(e.target.value)}
+        />
       </div>
       <div className="option-list">
         <div className="candidate">
@@ -54,14 +116,35 @@ const CreateElectionPage = props => {
       <div
         className="file-upload"
         onClick={() => uploadRef.current.click()}
+        onDrop={e => onDrop(e)}
+        onDragOver={e => onDragOver(e)}
+        onDragLeave={e => onDragLeave(e)}
       >
-        <input type="file" style={{ display: 'none' }} ref={uploadRef}/>
-        <div className="upload-area">
-          <span>Tải lên file</span>
-        </div>
+        {
+          data ?
+          <span className="heading-6">
+            {data.filename}
+            {
+              console.log(data)
+            }
+          </span>
+          :
+          <>
+            <input
+              type="file"
+              style={{ display: 'none' }}
+              ref={uploadRef}
+              onChange={e => handleUploadFile(e.target.files)}
+            />
+            <div className="upload-area">
+              <span>Tải lên file</span>
+            </div>
+          </>
+        }
+        
       </div>
       <div className="controller">
-        <Button title="Create"/>
+        <Button title="Create" type={`${controllButton() ? 'normal' : 'disable'}`}/>
       </div>
     </div>
   )
