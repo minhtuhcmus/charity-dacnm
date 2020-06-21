@@ -3,6 +3,7 @@ import './style.scss'
 // components
 import TextArea from '_components/text-area'
 import TextInput from '_components/text-input'
+import Button from '_components/button'
 const CreateElectionPage = props => {
   const [candidate, setCandidate] = useState(0)
   const [candidateList, setCandidateList] = useState([])
@@ -58,6 +59,9 @@ const CreateElectionPage = props => {
         <div className="upload-area">
           <span>Tải lên file</span>
         </div>
+      </div>
+      <div className="controller">
+        <Button title="Create"/>
       </div>
     </div>
   )
