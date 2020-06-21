@@ -7,13 +7,13 @@ contract Voting {
   struct Voter  {
     bool voted;
     uint vote;
-    bool isValue;
   }
   struct Candidate {
     bytes32 name;
     uint voteCount;
   }
   Candidate[] public candidates;
+  address[] public participants;
   mapping(address => Voter) public voters;
 
   constructor(bytes32[] memory candidateName) public {
@@ -21,8 +21,7 @@ contract Voting {
     for (uint i = 0; i < candidateName.length; i++){
       candidates.push(Candidate({name: candidateName[i], voteCount: 0}));
     }
-    voters[chairperson].voted = false;
-    voters[chairperson].isValue = true;
+    // participants.push(chairperson);
   }
 
   function addParticipant(address participant) public {
@@ -31,16 +30,28 @@ contract Voting {
       "Only chairperson can add participant."
     );
     require (
-      !voters[participant].isValue,
+      !validParticipant(participant),
       "Participant is exist."
     );
-    voters[participant].voted = false;
-    voters[participant].isValue = true;
+    participants.push(participant);
   }
 
-  function vote(uint candidateIndex) public {
+  function validParticipant(address participant) private view returns (bool) {
+    for(uint i = 0; i < participants.length; i++) {
+      if (participants[i] == participant) {
+        return true;
+      }
+    }
+    return false;
+  }
+
+  function getSender () public view returns (address){
+        return msg.sender; // just return msg.sender
+  }
+
+  function vote(uint candidateIndex) public{
     Voter storage sender = voters[msg.sender];
-    require(sender.isValue, "Participant have not permission.");
+    require(validParticipant(msg.sender), "Participant have not permission.");
     require(!sender.voted, "Already voted");
     require(candidateIndex < candidates.length, "Candidate uncorrect");
     sender.voted = true;
@@ -66,5 +77,9 @@ contract Voting {
 
   function getCadidateList() public view returns (Candidate[] memory){
     return candidates;
+  }
+
+  function getParticipantList() public view returns (address[] memory){
+    return participants;
   }
 }
