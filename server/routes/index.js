@@ -1,7 +1,6 @@
 var express = require('express');
 var router = express.Router();
-var web3 = global.web3;
-var deployedContract = global.deployedContract;
+var {smartContract} = require('../services/smart_contract')
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
@@ -41,7 +40,37 @@ router.post('/account', function(req, res, next) {
       message : "Request Body Not Contain 'emails'"
     })
   }
-  
+  res.json({
+    ok : true
+  })
+});
+
+router.post('/vote', async function(req, res, next) {
+  var body = req.body
+  if (!('candidate_index' in body)) {
+    res.status(400).json({
+      message : "Request Body Not Contain 'candidate_index'"
+    })
+  }
+  headers = JSON.stringify(req.headers)
+  if (!('Account' in headers)) {
+    res.status(400).json({
+      message : "Request Header Not Contain 'Account'"
+    })
+  }
+
+  smartContract.setDefaultAccount(headers.accounts);
+  try {
+    vote = smartContract.vote(body.candidate_index);
+    res.json({
+      ok : true
+    })
+  } catch(Err) {
+    console.log(Err);
+    res.status(400).json({
+      message : "Not"
+    })
+  }
 });
 
 

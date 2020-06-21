@@ -8,17 +8,6 @@ var indexRouter = require('./routes/index');
 
 var app = express();
 
-// Ether Config
-const Web3 = require('web3');
-const fs = require("fs");
-const web3 = new Web3("http://localhost:8545");
-
-const bytecode = fs.readFileSync('contracts/contracts_voting_sol_Voting.bin').toString()
-const abi = JSON.parse(fs.readFileSync('contracts/contracts_voting_sol_Voting.abi').toString())
-
-global.deployedContract = new web3.eth.Contract(abi);
-global.web3 = web3;
-
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');

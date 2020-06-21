@@ -42,7 +42,7 @@ contract Voting {
     Voter storage sender = voters[msg.sender];
     require(sender.isValue, "Participant have not permission.");
     require(!sender.voted, "Already voted");
-    require(candidateIndex < candidates.length, "Proposal uncorrect");
+    require(candidateIndex < candidates.length, "Candidate uncorrect");
     sender.voted = true;
     sender.vote = candidateIndex;
     candidates[candidateIndex].voteCount += 1;

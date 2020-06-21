@@ -2,8 +2,8 @@ const Web3 = require('web3');
 const web3 = new Web3("http://localhost:8545");
 const fs = require("fs");
 
-bytecode = fs.readFileSync('contracts_voting_sol_Voting.bin').toString()
-abi = JSON.parse(fs.readFileSync('contracts_voting_sol_Voting.abi').toString())
+bytecode = fs.readFileSync('contracts/contracts_voting_sol_Voting.bin').toString()
+abi = JSON.parse(fs.readFileSync('contracts/contracts_voting_sol_Voting.abi').toString())
 
 deployedContract = new web3.eth.Contract(abi)
 listOfCandidates = ['Rama', 'Nick', 'Jose']
