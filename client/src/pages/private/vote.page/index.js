@@ -22,7 +22,7 @@ const VotePage = props => {
           changeValue={setValue}
           options={[
             {value: 'dfsadfasdfasd'},
-            {value: 'adsfwqerewcfwqeqew'},
+            {value: 'adsfwqerewcfwqeqewasdfdsfasdfasdfasdfsdafasdfdsf'},
             {value: 'asdfwefqweadcef'},
             {value: 'dfwegvasweerg'},
             {value: 'weqrewrqwer'}
@@ -30,7 +30,7 @@ const VotePage = props => {
         />
       </div>
       <div className="foot">
-        <Button onClick={handleSubmit} title="Vote"/>
+        <Button type={`${value ? 'normal' : 'disable'}`} onClick={handleSubmit} title="Vote"/>
       </div>
     </form>
   )

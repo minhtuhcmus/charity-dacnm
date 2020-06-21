@@ -61,7 +61,8 @@ module.exports = () => {
         _layout: path.resolve(__dirname, 'src/layout'),
         _router: path.resolve(__dirname, 'src/router'),
         _styles: path.resolve(__dirname, 'src/styles'),
-        _static: path.resolve(__dirname, 'public/static')
+        _static: path.resolve(__dirname, 'public/static'),
+        _store: path.resolve(__dirname, 'src/store')
       }
     },
     output: {

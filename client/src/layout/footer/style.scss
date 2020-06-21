@@ -4,10 +4,12 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  text-align: center;
   span {
     @extend .heading-6;
     a {
       @extend .heading-5;
+      text-decoration: none !important;
     }
   }
 }

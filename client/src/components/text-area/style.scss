@@ -15,6 +15,7 @@
     padding: 12px;
     color: $PrimaryD;
     @extend .paragraph-3;
+    box-sizing: border-box;
     &:focus{
       border: 1px solid $PrimaryA;
       @include box-shadow($BackgroundD);

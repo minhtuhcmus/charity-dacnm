@@ -1,8 +1,13 @@
 import { ACTIONS } from '_constants'
 
-export const login = payload => ({
-  type: ACTIONS.LOGIN,
-  value: payload
+export const loginSuccess = payload => ({
+  type: ACTIONS.LOGIN_SUCCESS,
+  payload
+})
+
+export const loginFail = payload => ({
+  type: ACTIONS.LOGIN_FAIL,
+  payload
 })
 
 export const logout = () => ({

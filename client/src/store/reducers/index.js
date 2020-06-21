@@ -12,7 +12,7 @@ const initialState = {
 const root = (state = initialState, action) => {
   switch (action.type) {
     case ACTIONS.LOADING:
-      return { ...state, loading: action.value }
+      return { ...state, loading: action.payload }
     default:
       return state
   }

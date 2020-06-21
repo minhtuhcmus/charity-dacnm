@@ -18,7 +18,7 @@ const VotingList = props => {
           changeValue(el.value)
         }}
       >
-        {el.value}
+        <span>{el.value}</span>
       </div>
     )
   }

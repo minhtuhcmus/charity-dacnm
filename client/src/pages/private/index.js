@@ -1,6 +1,6 @@
-import ProfilePage from './ProfilePage'
-import VotePage from './VotePage'
-
+import ProfilePage from './profile.page'
+import VotePage from './vote.page'
+import CreateElectionPage from './create-election.page'
 import PrivateRoute from '_router/PrivateRoute'
 const routeConfig = {
   layout: {
@@ -17,6 +17,7 @@ const PrivateRoutes = [
     title: 'Profile Page',
     component: ProfilePage,
     path: '/profile',
+    roleAllow: ['USER', 'ADMIN']
   },
   {
     ...routeConfig,
@@ -28,7 +29,19 @@ const PrivateRoutes = [
     title: 'Vote Page',
     component: VotePage,
     path: '/vote',
-    roleAllow: 'USER'
+    roleAllow: ['USER']
+  },
+  {
+    ...routeConfig,
+    layout: {
+      header: true,
+      sider: false,
+      footer: true,
+    },
+    title: 'Create Election Page',
+    component: CreateElectionPage,
+    path: '/admin/create-election',
+    roleAllow: ['ADMIN']
   }
 ]
 
