@@ -15,7 +15,7 @@ const VotingList = props => {
         className={classNames('container', { active: el.value === value })}
         key={index}
         onClick={() => {
-          changeValue(el.value)
+          changeValue(index)
         }}
       >
         <span>{el.value}</span>

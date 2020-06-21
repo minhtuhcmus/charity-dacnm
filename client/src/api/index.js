@@ -14,8 +14,8 @@ const makeRequest = async (method, url, headers= {}, data) => {
   // }
 
   const config = {
-    baseURL: env.process.REACT_API_URI,
-    url: `api${url}`,
+    baseURL: 'http://localhost:3000',
+    url: `${url}`,
     // headers: headers,
     method: method,
     paramsSerializer: function(params) {

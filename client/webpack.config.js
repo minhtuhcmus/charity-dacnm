@@ -73,7 +73,7 @@ module.exports = () => {
     devServer: {
       contentBase: path.join(__dirname, "public/"),
       host: '127.0.0.1',
-      port: 3000,
+      port: 5000,
       hot: true,
       open: true,
       quiet: true,
@@ -82,7 +82,7 @@ module.exports = () => {
       watchContentBase: true,
       disableHostCheck: true,
       historyApiFallback: true,
-      publicPath: "http://localhost:3000/dist/"
+      publicPath: "http://localhost:5000/dist/"
     },
     plugins: [
       new webpack.HotModuleReplacementPlugin(),

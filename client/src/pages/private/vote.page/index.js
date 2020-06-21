@@ -1,5 +1,6 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import './style.scss'
+import userAPI from '_api/user'
 //component
 import VotingList from '_components/voting-list'
 import Button from '_components/button'
@@ -7,10 +8,19 @@ import TextInput from '_components/text-input'
 //package
 const VotePage = props => {
   const [value, setValue] = useState(null)
-  const handleSubmit = e => {
+  const [code, setCode] = useState(null)
+  const [candidates, setCandidates] = useState(null)
+  const handleSubmit = async e => {
     e.prventDefault()
-    console.log('submit')
+    await userAPI.vote(value)
   }
+  const getCandidates = async () => {
+    const res = await userAPI.getCandidates()
+    setCandidates(res)
+  }
+  useEffect(() => {
+    getCandidates()
+  }, [])
   return (
     <form className="page-voting" onSubmit={handleSubmit}>
       <div className="title">
@@ -21,17 +31,18 @@ const VotePage = props => {
         <VotingList
           value={value}
           changeValue={setValue}
-          options={[
-            {value: 'dfsadfasdfasd'},
-            {value: 'adsfwqerewcfwqeqewasdfdsfasdfasdfasdfsdafasdfdsf'},
-            {value: 'asdfwefqweadcef'},
-            {value: 'dfwegvasweerg'},
-            {value: 'weqrewrqwer'}
-          ]}
-        />
+          options={candidates}
+        />  
+      </div>
+      <div className="code">
+        <TextInput title="Hãy nhập mã code" value={code} onChange={e => setCode(e.target.value)}/>
       </div>
       <div className="foot">
-        <Button type={`${value ? 'normal' : 'disable'}`} onClick={handleSubmit} title="Vote"/>
+        <Button
+          type={`${value && code ? 'normal' : 'disable'}`}
+          onClick={handleSubmit}
+          title="Vote"
+        />
       </div>
     </form>
   )
