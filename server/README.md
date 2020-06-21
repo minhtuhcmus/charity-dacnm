@@ -1,0 +1,1 @@
+node_modules/.bin/solcjs --bin --abi contracts/voting.sol
