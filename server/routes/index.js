@@ -7,7 +7,7 @@ router.get('/', function(req, res, next) {
   res.render('index', { title: 'Express' });
 });
 
-router.post('/login', function(req, res, next) {
+router.post('/login', async function(req, res, next) {
   var body = req.body
   if (!('address' in body)) {
     res.status(400).json({
@@ -15,10 +15,9 @@ router.post('/login', function(req, res, next) {
     })
   }
   try {
-    web3.eth.getBalance(body.address).then((result)=>{
-      res.json({
-        ok : true
-      })
+    await smartContract.getBallance(body.address)
+    res.json({
+      ok : true
     })
   } catch(err) {
     res.status(403).json({
@@ -28,9 +27,8 @@ router.post('/login', function(req, res, next) {
 });
 
 router.get('/account', function(req, res, next) {
-  web3.eth.getAccounts().then((result)=>{
-    res.json({accounts: result});
-  })
+  result = smartContract.getAccount();
+  res.json({accounts: result});
 });
 
 router.post('/account', function(req, res, next) {
