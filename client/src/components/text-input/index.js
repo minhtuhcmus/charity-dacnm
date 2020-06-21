@@ -15,14 +15,14 @@ const TextInput = props => {
   } = props
   return (
     <div className="component-text-input">
-      <p className="title">{title && <span>{title}</span>}</p>
+      {title && <span className="title">{title}</span>}
       <input
         {...rest}
         value={value}
         onChange={onChange}
         className={classNames(size, {error: error}, {warning: warning})}
       />
-      <p className="errors">{error && <span>{error}</span>}</p>
+      {error && <span className="errors">{error}</span>}
     </div>
   )
 }
