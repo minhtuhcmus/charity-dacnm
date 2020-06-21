@@ -7,10 +7,6 @@
   height: 100%;
   box-sizing: border-box;
   @extend .box-wrapper;
-  .description {
-    height: 48px;
-    padding-bottom: 24px;
-  }
   .option-list{
     display: flex;
     flex-direction: column;

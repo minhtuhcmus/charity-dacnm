@@ -1,11 +1,11 @@
 import React, { useState, useRef, useEffect } from 'react'
 import './style.scss'
+import userAPI from '_api/user'
 // components
 import TextArea from '_components/text-area'
 import TextInput from '_components/text-input'
 import Button from '_components/button'
 const CreateElectionPage = props => {
-  const [description, setDescription] = useState(null)
   const [candidate, setCandidate] = useState(0)
   const [candidateList, setCandidateList] = useState(false)
   const [data, setData] = useState(false)
@@ -73,9 +73,11 @@ const CreateElectionPage = props => {
   const onDragLeave = e => {
     e.preventDefault()
   }
+  const handleSubmit = async () => {
+    const res = await userAPI.createElection(data)
+    console.log(res)
+  }
   const controllButton = () => {
-    if (!description)
-      return false
     if (candidate === 0)
       return false
     else {
@@ -93,13 +95,6 @@ const CreateElectionPage = props => {
   }
   return (
     <div className="page-create-election">
-      <div className="description">
-        <TextArea
-          placeholder="Mô tả"
-          value={description}
-          onChange={e => setDescription(e.target.value)}
-        />
-      </div>
       <div className="option-list">
         <div className="candidate">
           <TextInput
@@ -144,7 +139,11 @@ const CreateElectionPage = props => {
         
       </div>
       <div className="controller">
-        <Button title="Create" type={`${controllButton() ? 'normal' : 'disable'}`}/>
+        <Button
+          title="Create"
+          type={`${controllButton() ? 'normal' : 'disable'}`}
+          onClick={handleSubmit}
+        />
       </div>
     </div>
   )
