@@ -3,7 +3,7 @@ const Web3 = require('web3');
 const fs = require("fs");
 const ganache = require("ganache-core");
 const { resolve } = require('path');
-const web3 = new Web3(ganache.provider());
+const web3 = new Web3(ganache.provider({total_accounts: 1000}));
 // const web3 = new Web3("http://locahost:8545");
 
 const bytecode = fs.readFileSync('contracts/contracts_voting_sol_Voting.bin').toString()
@@ -12,6 +12,7 @@ const deployedContract = new web3.eth.Contract(abi)
 var smartContract = {};
 var adminAccount = null;
 smartContract.deploy = false;
+account_index = 1
 
 smartContract.adminAccount = adminAccount;
 
@@ -55,10 +56,17 @@ smartContract.getAccount = () => {
 }
 
 smartContract.createAccount = () => {
-    acc = web3.eth.accounts.create();
-    return acc
+    // acc = web3.eth.accounts.create();
+    password = '!@superpassword'
+    return new Promise((resolve) => {
+        smartContract.getAccount().then((accounts)=>{
+            resolve(accounts[account_index])
+            account_index++
+        })
+    }) 
 }
 smartContract.vote = (candidateIndex, fromAccount) => {
+    web3.eth.personal.unlockAccount(fromAccount, password, "15")
     return deployedContract.methods.vote(candidateIndex)
     .send({
         from: fromAccount,
