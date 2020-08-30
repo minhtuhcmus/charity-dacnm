@@ -43,9 +43,12 @@ router.get('/account', function(req, res, next) {
 
 router.get('/new_account', function(req, res, next) {
   var body = req.body
-  res.json({
-    account : smartContract.createAccount()
+  smartContract.createAccount().then(function(result){
+    res.json({
+      account : result
+    })  
   })
+  
 });
 
 
@@ -82,7 +85,7 @@ router.post('/voters', function(req, res, next) {
     let code = await smartContract.createAccount();
     console.log("code", code)
     transporter.sendMail({
-      from: 'minhtunguyenphan@gmail.com',
+      from: 'no one',
       to: el,
       subject: 'Voting code',
       text: `Xin chào bạn. Đây là mã bầu cử của bạn: ${code.address}`
@@ -107,18 +110,21 @@ router.post('/vote', function(req, res, next) {
     res.status(400).json({
       message : "Request Body Not Contain 'candidate_index'"
     })
+    return
   }
   headers = req.headers
   if (headers.account == undefined) {
     res.status(400).json({
       message : "Request Header Not Contain 'Account' Header"
     })
+    return
   }
 
   if (!smartContract.deploy) {
     res.status(400).json({
       message : "No Election"
     })
+    return
   }
 
   smartContract.vote(body.candidate_index, headers.account)
@@ -128,9 +134,10 @@ router.post('/vote', function(req, res, next) {
       })
     })
     .catch((err) => {
-      console.log(err);
-      res.status(400).json({
-        message : "Error."
+        console.log(err);
+        res.status(400).json({
+        message : "Error.",
+        detail: err.message
       })
     })
 });
