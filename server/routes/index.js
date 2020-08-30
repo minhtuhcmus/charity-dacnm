@@ -1,6 +1,7 @@
 var express = require('express');
 var router = express.Router();
 var {smartContract} = require('../services/smart_contract')
+var transporter = require('../services/mailer');
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
@@ -50,12 +51,8 @@ router.get('/new_account', function(req, res, next) {
 
 router.post('/election', function(req, res, next) {
   var body = req.body
-  if (!('names' in body)) {
-    res.status(400).json({
-      message : "Request Body Not Contain 'emails'"
-    })
-  }
-  smartContract.newElection(body.names)
+  console.log('body', body)
+  smartContract.newElection(body)
     .then(()=>{
       res.json({
         ok : true
@@ -79,19 +76,28 @@ router.get('/candidates', function(req, res, next) {
     })
 });
 
-router.post('/voter', function(req, res, next) {
-  var body = req.body
-  if (!('voter' in body)) {
-    res.status(400).json({
-      message : "Request Body Not Contain 'emails'"
-    })
-  }
-  smartContract.addVoter(body.voter)
-    .then(()=>{
-      res.json({
-        ok : true
-      })
-    })
+router.post('/voters', function(req, res, next) {
+  const body = req.body
+  body.forEach(async el => {
+    let code = await smartContract.createAccount();
+    console.log("code", code)
+    transporter.sendMail({
+      from: 'minhtunguyenphan@gmail.com',
+      to: el,
+      subject: 'Voting code',
+      text: `Xin chào bạn. Đây là mã bầu cử của bạn: ${code.address}`
+    }, function(error, info){
+      if (error) {
+        console.log(error);
+      } else {
+        console.log('Email sent: ' + info.response);
+        smartContract.addVoter(code.address)
+      }
+    });
+  });
+  res.json({
+    ok : true
+  })
 });
 
 
