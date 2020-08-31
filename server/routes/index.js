@@ -88,7 +88,7 @@ router.post('/voters', function(req, res, next) {
       from: 'no one',
       to: el,
       subject: 'Voting code',
-      text: `Xin chào bạn. Đây là mã bầu cử của bạn: ${code.address}`
+      text: `Xin chào bạn. Đây là mã bầu cử của bạn: ${code}`
     }, function(error, info){
       if (error) {
         console.log(error);
@@ -105,28 +105,31 @@ router.post('/voters', function(req, res, next) {
 
 
 router.post('/vote', function(req, res, next) {
-  var body = req.body
-  if (!('candidate_index' in body)) {
+  var {candidate_index} = req.body
+  console.log("body", candidate_index)
+  if (!candidate_index) {
     res.status(400).json({
       message : "Request Body Not Contain 'candidate_index'"
     })
     return
   }
+  console.log("body ok")
   headers = req.headers
+  console.log("headers", headers)
   if (headers.account == undefined) {
     res.status(400).json({
       message : "Request Header Not Contain 'Account' Header"
     })
     return
   }
-
+  console.log("header ok")
   if (!smartContract.deploy) {
     res.status(400).json({
       message : "No Election"
     })
     return
   }
-
+  console.log("check smart contract ok")
   smartContract.vote(body.candidate_index, headers.account)
     .then((resulf)=>{
       res.json({
